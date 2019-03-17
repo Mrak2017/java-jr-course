@@ -38,6 +38,21 @@ public class WarriorStateTest {
 
     }
 
+    @Test
+    public void takeHeavyDamageAndHpPositive() {
+        WarriorState state =
+                WarriorState.builder()
+                        .attackLevel(100)
+                        .defenceLevel(100)
+                        .hp(1000)
+                        .maxHP(1000)
+                        .strength(100)
+                        .level(1).build();
+
+        ActorState damagedState = state.takeDamage(1001);
+
+        Assert.assertEquals(0, damagedState.getHP());
+    }
 
     @Test
     public void builderTest() {

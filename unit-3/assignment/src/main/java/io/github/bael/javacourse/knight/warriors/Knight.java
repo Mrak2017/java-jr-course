@@ -5,12 +5,16 @@ import io.github.bael.javacourse.knight.chances.Chance;
 /**
  * Рыцарь. наносит урон черному рыцарю с удвоенной силой.
  */
-public class Knight implements Actor {
+public class Knight extends Warrior {
+
+    private static final int BLACK_KNIGHT_DAMAGE_MULTIPLIER = 2;
 
     private Knight() {
+        super();
     }
 
     public Knight(ActorState state) {
+        super(state);
     }
 
 
@@ -20,22 +24,7 @@ public class Knight implements Actor {
      * @param blackKnight тип противника - черный рыцарь
      */
     public void attackEnemy(Chance chance, BlackKnight blackKnight) {
-
-
-    }
-
-    @Override
-    public void attackEnemy(Chance chance, Actor warrior) {
-
-    }
-
-    @Override
-    public void receiveAttack(Damage strike) {
-
-    }
-
-    @Override
-    public ActorState getState() {
-        return null;
+        int damageValue = state.getAttackLevel() + state.getStrength() * BLACK_KNIGHT_DAMAGE_MULTIPLIER;
+        blackKnight.receiveAttack(new Damage(damageValue, this.getIsCriticalStrike(chance)));
     }
 }
